@@ -90,8 +90,18 @@ void command(int type,int connfd)
 {
 	switch (type) {
 		case ERROR:
+			(void)write(connfd, "HTTP/1.1 403 Forbidden\r\n\r\n",27);
+			break;
 		case FORBIDDEN:
+			(void)write(connfd, "HTTP/1.1 403 Forbidden\r\n\r\n",27);
+			break;
 		case NOTFOUND:
+			(void)write(connfd, "HTTP/1.1 404 NOT FOUND\r\n\r\n",27);
+			break;	
 		case NORMAL:
+			(void)write(connfd, "HTTP/1.1 200 OK\r\n\r\n",19);
+			break;
 	}
+	if(type == ERROR || type == FORBIDDEN || type == NOTFOUND)
+		exit(3);
 }
